@@ -37,7 +37,7 @@ const removeWishlist = (id) => {
       </header>
 
       <div className="wishlist-section">
-        <h2>Wishlists</h2>
+        <h2>Produktwünsche</h2>
         <ul>
           {wishlists.map((wishlist, index) => (
             <li key={index}>

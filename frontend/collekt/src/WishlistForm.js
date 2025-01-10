@@ -20,11 +20,11 @@ function WishlistForm({ addWishlist }) {
 
   return (
     <div className="wishlist-form">
-      <h2>Wishlist hinzufügen</h2>
+      <h2>Produktwunsch hinzufügen</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Name der Wishlist"
+          placeholder="Name des Produktes"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
@@ -43,7 +43,7 @@ function WishlistForm({ addWishlist }) {
           onChange={(e) => setKeywords(e.target.value)}
           required
         />
-        <button type="submit">Wishlist hinzufügen</button>
+        <button type="submit">Produktwunsch hinzufügen</button>
       </form>
     </div>
   );
