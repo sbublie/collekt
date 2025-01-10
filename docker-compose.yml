@@ -1,10 +1,17 @@
 services:
+  cp-proxy:
+    container_name: proxy
+    restart: always
+    build: 
+      context: ./proxy
+    ports:
+      - 80:80
   jaeger:
     image: jaegertracing/all-in-one:latest
     ports:
-      - "16686:16686"  # Jaeger UI
+      - "80:16686"  # Jaeger UI
       - "4317:4317"    # Collector, OpenTelemetry gRPC
       - "4318:4318"    # Collector, OpenTelemetry gRPC
-    #environment:
+    environment:
       # This tells Jaeger that it should run the UI with a given prefix.
-      # QUERY_BASE_PATH: /jaeger/prefix
+      QUERY_BASE_PATH: /jaeger
