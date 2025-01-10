@@ -1,5 +1,4 @@
 import React from 'react';
-import './OfferList.css';
 
 function OfferList({ offers }) {
   if (offers.length === 0) {
