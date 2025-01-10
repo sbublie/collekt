@@ -9,7 +9,6 @@ services:
   jaeger:
     image: jaegertracing/all-in-one:latest
     ports:
-      - "80:16686"  # Jaeger UI
       - "4317:4317"    # Collector, OpenTelemetry gRPC
       - "4318:4318"    # Collector, OpenTelemetry gRPC
     environment:
