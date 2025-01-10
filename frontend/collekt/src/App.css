@@ -57,7 +57,7 @@ header h1 {
 
 /* Wishlist Section */
 .wishlist-section {
-  margin-top: 30px;
+  margin-top: 50px;
   text-align: left;
 }
 
@@ -154,6 +154,14 @@ header h1 {
 /* Angebot List */
 .offer-list {
   margin-top: 40px;
+  text-align: left;
+}
+
+.offer-list h2 {
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-weight: bold;
   text-align: left;
 }
 
