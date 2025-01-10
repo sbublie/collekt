@@ -1,0 +1,35 @@
+.offer-list {
+    margin-top: 30px;
+    text-align: left;
+  }
+  
+  .offer-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+  }
+  
+  .offer-item h3 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .offer-item p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .offer-item a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  .offer-item a:hover {
+    text-decoration: underline;
+  }
+  
