@@ -20,12 +20,12 @@ function App() {
   };
 
   // Wunschliste hinzufügen
-  const addWishlist = (wishlist) => {
+  const addWish = (wishlist) => {
     setWishlists([...wishlists, wishlist]);
   };
 
   // Funktion zum Entfernen einer Wishlist
-const removeWishlist = (id) => {
+const removeWish = (id) => {
   setWishlists(wishlists.filter((wishlist) => wishlist.id !== id));
 };
 
@@ -55,13 +55,13 @@ const removeWishlist = (id) => {
                 Angebote anzeigen
               </button>
               {/* Entfernen-Button */}
-              <button onClick={() => removeWishlist(wishlist.id)} className="remove-btn">
+              <button onClick={() => removeWish(wishlist.id)} className="remove-btn">
                 Entfernen
               </button>
             </li>
           ))}
         </ul>
-        <WishlistForm addWishlist={addWishlist} />
+        <WishlistForm addWish={addWish} />
       </div>
 
       {/* Anzeige der Angebote */}
