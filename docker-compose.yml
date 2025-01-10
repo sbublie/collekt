@@ -14,3 +14,17 @@ services:
     environment:
       # This tells Jaeger that it should run the UI with a given prefix.
       QUERY_BASE_PATH: /jaeger
+  logic:
+    container_name: logic
+    restart: always
+    build: 
+      context: ./logic
+  mongodb:
+    container_name: mongodb
+    restart: always
+    image: mongodb/mongodb-community-server:latest
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+
+
