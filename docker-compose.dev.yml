@@ -19,14 +19,13 @@ services:
     restart: always
     build: 
       context: ./logic
-    environment:
-      - BACKEND_HOST_NAME=${BACKEND_HOST_NAME}
   backend:
     container_name: backend
     restart: always
     build: 
       context: ./backend
-
+    ports:
+      - 8000:8000
   mongodb:
     container_name: mongodb
     restart: always
@@ -34,9 +33,5 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
-  frontend:
-    container_name: collekt-frontend
-    build:
-      context: ./frontend/collekt  # Der Ordner, in dem das Dockerfile des Frontends liegt
-    restart: always
+
 
