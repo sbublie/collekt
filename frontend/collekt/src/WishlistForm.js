@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 
-function WishlistForm({ addWishlist }) {
+function WishlistForm({ addWish }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [keywords, setKeywords] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const wishlist = {
+    const wishlistItem = {
+      id: Date.now().toString(),  // Eine einfache ID mit dem aktuellen Timestamp
       name,
       description,
-      keywords: keywords.split(',').map((keyword) => keyword.trim()),
+      search_terms: keywords.split(',').map((keyword) => keyword.trim()),
     };
-    addWishlist(wishlist);
+    addWish(wishlistItem);
     setName('');
     setDescription('');
     setKeywords('');

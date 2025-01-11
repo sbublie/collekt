@@ -8,11 +8,11 @@ function OfferList({ offers }) {
   return (
     <div className="offer-list">
       {offers.map((offer) => (
-        <div key={offer.id} className="offer-item">
-          <h3>{offer.title}</h3>
-          <p><strong>Preis:</strong> {offer.price}</p>
-          <p><strong>Shop:</strong> {offer.store}</p>
-          <a href={offer.link} target="_blank" rel="noopener noreferrer">Mehr erfahren</a>
+        <div key={offer.wishlist_item_id} className="offer-item">
+          {/* Angebotstitel, hier nehme ich an, dass du ihn im Backend hinzufügst */}
+          <h3>Produktangebot</h3>
+          <p><strong>Preis:</strong> {offer.price} €</p>
+          <p><strong>Link:</strong> <a href={offer.url} target="_blank" rel="noopener noreferrer">Mehr erfahren</a></p>
         </div>
       ))}
     </div>

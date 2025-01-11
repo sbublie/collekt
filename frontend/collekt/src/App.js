@@ -1,33 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import OfferList from './OfferList';
 import WishlistForm from './WishlistForm';
 
+const BACKEND_HOST = "http://localhost/backend"
+
+
 function App() {
   const [wishlists, setWishlists] = useState([]);
   const [offers, setOffers] = useState([]);
-  const [selectedWishlist, setSelectedWishlist] = useState(null);
 
-  // Mock für die Angebote basierend auf einer Wishlist
-  const fetchOffers = (wishlist) => {
-    // Hier wird nur eine Simulation von Angeboten verwendet, basierend auf den Suchbegriffen der Wishlist.
-    const fakeOffers = [
-      { id: 1, title: 'Produkt 1', price: '29,99 €', store: 'Store A', link: '#' },
-      { id: 2, title: 'Produkt 2', price: '49,99 €', store: 'Store B', link: '#' },
-      { id: 3, title: 'Produkt 3', price: '19,99 €', store: 'Store C', link: '#' },
-    ];
-    setOffers(fakeOffers); // Simulierte API-Daten setzen
+  // Holen der Wishlist von der API
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      const response = await fetch(`${BACKEND_HOST}/wishlist`);
+      const data = await response.json();
+      setWishlists(data.items);
+    };
+
+    fetchWishlist();
+  }, []); // Leeres Array bedeutet, dass der Effekt nur beim ersten Laden ausgeführt wird.
+
+  // Abrufen von Angeboten basierend auf Wishlist-Element
+  const fetchOffers = async (wishlistItem) => {
+    console.log("Fetching")
+    console.log(`${BACKEND_HOST}`)
+    
+    const response = await fetch(`${BACKEND_HOST}/offerings/${wishlistItem.id}`);
+    const data = await response.json();
+    setOffers([data]); // Nur ein Angebot wird zurückgegeben, deshalb setzen wir es als Array
   };
 
-  // Wunschliste hinzufügen
-  const addWish = (wishlist) => {
-    setWishlists([...wishlists, wishlist]);
+   // Wunsch hinzufügen
+   const addWish = async (wishlistItem) => {
+    console.log("Adding")
+    console.log(`${BACKEND_HOST}`)
+    const response = await fetch(`${BACKEND_HOST}/wishlist`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(wishlistItem),
+    });
+    const newItem = await response.json();
+    setWishlists([...wishlists, newItem]);
   };
 
-  // Funktion zum Entfernen einer Wishlist
-const removeWish = (id) => {
-  setWishlists(wishlists.filter((wishlist) => wishlist.id !== id));
-};
+  // Wunsch entfernen
+  const removeWish = async (id) => {
+    await fetch(`${BACKEND_HOST}/wishlist`, {
+      method: 'DELETE',
+    });
+    setWishlists(wishlists.filter((wishlist) => wishlist.id !== id));
+  };
 
   return (
     <div className="App">
@@ -39,19 +62,19 @@ const removeWish = (id) => {
       <div className="wishlist-section">
         <h2>Produktwünsche</h2>
         <ul>
-          {wishlists.map((wishlist, index) => (
-            <li key={index}>
+          {wishlists.map((wishlist) => (
+            <li key={wishlist.id}>
               <strong>{wishlist.name}</strong> - <span className="wishlist-description">{wishlist.description}</span>
               <br />
               <br />
               <span className="wishlist-keywords">
-                {wishlist.keywords && wishlist.keywords.length > 0
-                  ? `Suchbegriffe: ${wishlist.keywords.join(', ')}`
+                {wishlist.search_terms && wishlist.search_terms.length > 0
+                  ? `Suchbegriffe: ${wishlist.search_terms.join(', ')}`
                   : 'Keine Suchbegriffe'}
               </span>
               <br />
               {/* Button zum Laden der Angebote */}
-              <button onClick={() => fetchOffers(wishlist)} className='add-btn'>
+              <button onClick={() => fetchOffers(wishlist)} className="add-btn">
                 Angebote anzeigen
               </button>
               {/* Entfernen-Button */}
