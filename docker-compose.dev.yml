@@ -19,14 +19,13 @@ services:
     restart: always
     build: 
       context: ./logic
-    environment:
-      - BACKEND_HOST_NAME=${BACKEND_HOST_NAME}
   backend:
     container_name: backend
     restart: always
     build: 
       context: ./backend
-
+    ports:
+      - 8000:8000
   mongodb:
     container_name: mongodb
     restart: always
