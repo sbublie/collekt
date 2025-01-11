@@ -1,13 +1,14 @@
-import json
-from flask import Flask, request
+from shop_adapter import ShopAdapter
+import time
 
-app = Flask(__name__)
+def main():
 
+    while(True):
+        print(ShopAdapter().search_offers())
+        time.sleep(5)
 
-@app.route('/', methods=['GET'])
-def get_statistics():
-    return {"status": "ok"}
+    
+    
 
 if __name__ == "__main__":
-    app.run(port=5000, host='0.0.0.0')
-    
+    main()
