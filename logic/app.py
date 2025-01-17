@@ -7,8 +7,5 @@ def main():
         print(ShopAdapter().search_offers())
         time.sleep(5)
 
-    
-    
-
 if __name__ == "__main__":
     main()

@@ -2,9 +2,25 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import OfferList from './OfferList';
 import WishlistForm from './WishlistForm';
+import { WebTracerProvider } from '@opentelemetry/sdk-trace-web';
+import { FetchInstrumentation } from '@opentelemetry/instrumentation-fetch';
+import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base';
+import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
 
-const BACKEND_HOST = "http://localhost/backend"
 
+const BACKEND_HOST = "http://localhost/backend";
+
+const provider = new WebTracerProvider();
+
+// Use OTLP HTTP exporter to send traces to Jaeger
+const exporter = new OTLPTraceExporter({
+  url: 'http://localhost:4317', // Jaeger OTLP endpoint
+});
+
+// Use BatchSpanProcessor (recommended for production)
+provider.addSpanProcessor(new BatchSpanProcessor(exporter));
+
+provider.register();
 
 function App() {
   const [wishlists, setWishlists] = useState([]);
@@ -46,7 +62,7 @@ function App() {
 
   // Wunsch entfernen
   const removeWish = async (id) => {
-    await fetch(`${BACKEND_HOST}/wishlist`, {
+    await fetch(`${BACKEND_HOST}/wishlist/${id}`, {
       method: 'DELETE',
     });
     setWishlists(wishlists.filter((wishlist) => wishlist.id !== id));

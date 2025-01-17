@@ -1,0 +1,82 @@
+// You start with defining your terms and ...
+specification {
+    // ... "types" of your elements
+    element actor {
+        style {
+            shape person // how to render
+        }
+    }
+    element system
+    element component
+    element database {
+        style {
+            shape cylinder
+        }
+    }
+    // and "typed" relationships (if you need)
+    relationship async
+}
+
+// Here goes your model, the single source of truth
+model {
+    customer = actor 'User' {
+        description 'A user of Collekt'
+        -> ui 'opens in browser'
+    }
+
+    external = component 'External Shopping Site' {
+        description 'Sites like ebay, amazon, etc.'
+        -> cloud.logic 'get new offers'
+    }
+
+    cloud = system 'Collekt' {
+
+        backend = component 'Backend' {
+            icon tech:python
+            description 'Abstracts DB'
+        }
+        
+        logic = component 'Logic' {
+            icon tech:python
+            description 'Implements business logic'
+        }
+
+        ui = component 'Frontend' {
+            description 'React application'
+            style {
+                icon tech:react
+                shape browser
+            }
+        }
+
+        jaeger = component 'Jaeger' {
+            icon tech:jaeger
+            description 'Traces all the requests'
+        }
+
+        db = database 'PostgreSQL' {
+            icon tech:postgresql
+            description 'Stores all the data'
+        }
+
+        ui -> backend 'requests via HTTP'
+        backend -> db 'queries via SQL'
+        db -> backend 'returns data'
+        backend -> jaeger 'sends traces'
+        ui -> jaeger 'sends traces'
+        logic -> jaeger 'sends traces'
+        logic -> backend 'get wishlist / set offers'
+    }
+}
+
+// And finally, you define what to render
+views {
+    view index {
+        title 'Landscape view'
+        include *, cloud.*
+
+        style cloud.* {
+            color green
+        }
+    }
+}
