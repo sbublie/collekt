@@ -1,0 +1,25 @@
+{
+    "dependencies": {
+      "express": "^4.21.2",
+      "likec4": "^1.18.0"
+    },
+    "name": "docs",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js",
+      "build": "likec4 build --base '/docs'"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/sbublie/collekt.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/sbublie/collekt/issues"
+    },
+    "homepage": "https://github.com/sbublie/collekt#readme",
+    "description": ""
+  }
+  

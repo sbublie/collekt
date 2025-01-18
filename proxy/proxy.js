@@ -9,6 +9,7 @@ app.use("/jaeger", proxy("http://jaeger:16686", {
   proxyReqPathResolver: req => `/jaeger${req.url}`
 }));
 app.use("/backend", proxy("http://backend:8000"));
+app.use("/docs", proxy("http://docs:80"));
 app.use("/", proxy("http://collekt-frontend:80"));
 
 

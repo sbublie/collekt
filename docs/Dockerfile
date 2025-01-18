@@ -1,0 +1,20 @@
+# Use an official Node.js runtime as a parent image
+FROM node:20
+
+# Set the working directory inside the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json into the container
+COPY package*.json ./
+
+# Install application dependencies
+RUN npm install
+
+# Copy the rest of the application code into the container
+COPY . .
+
+# Build the application
+RUN npm run build
+
+# Define the command to run the application
+CMD ["npm", "start"]
