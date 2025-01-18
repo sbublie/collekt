@@ -16,3 +16,6 @@ Tracing can be used for:
 - Performance analysis: identification of bottlenecks and latencies
 - Fault Localization: shows faulty service dependencies
 - Dependency analysis: visualizes service communication
+
+To test our Jaeger implementation you can open localhost/jaeger to open the tool. Choose our Collekt service and then the
+operation you want to analyze.
