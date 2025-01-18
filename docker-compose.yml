@@ -1,5 +1,5 @@
 services:
-  cp-proxy:
+  proxy:
     container_name: proxy
     restart: always
     build: 
@@ -15,19 +15,16 @@ services:
     environment:
       # This tells Jaeger that it should run the UI with a given prefix.
       QUERY_BASE_PATH: /jaeger
-  logic:
-    container_name: logic
-    restart: always
-    build: 
-      context: ./logic
-    environment:
-      - BACKEND_HOST_NAME=${BACKEND_HOST_NAME}
   backend:
     container_name: backend
     restart: always
     build: 
       context: ./backend
-
+  docs:
+    container_name: docs
+    restart: always
+    build: 
+      context: ./docs
   mongodb:
     container_name: mongodb
     restart: always
