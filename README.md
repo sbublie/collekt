@@ -1,3 +1,10 @@
 # Collekt - Track your collection
 
 Collekt is a service that tracks new offers on ebay and co. to extend the collection of your favorite things. 
+
+## Docker
+
+You can install our service via Docker. Clone this repository into a folder of your choice.
+Then, open a Terminal and execute the command ```docker-compose up -d```.
+Wait for everything to finish installing and starting up.
+If you have done everything correctly, you can start the web interface by opening ```localhost```.
